@@ -1,8 +1,24 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import { fetchAllProducts } from "./api/server";
 
 function App() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  const [allProducts, setAllProducts] = useState({});
+
+  useEffect(() => {
+    const getAllProducts = async () => {
+      const result = await fetchAllProducts();
+      setAllProducts(result);
+      console.log(allProducts);
+    };
+    getAllProducts();
+  }, []);
+
+  return (
+    <>
+      <Navbar allProducts={allProducts} />
+    </>
+  );
 }
 
 export default App;
