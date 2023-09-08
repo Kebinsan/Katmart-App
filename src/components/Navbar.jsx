@@ -10,7 +10,7 @@ export default function Navbar({ allProducts }) {
         <Link to="/">Home</Link>
         <Link to="/shop">Shop</Link>
         <Link to="/account/login">Login</Link>
-      </nav>
+      </nav>{" "}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop allProducts={allProducts} />} />
