@@ -101,7 +101,7 @@ function App() {
           </div>
         </div>
       </nav>
-      {allCategories && <Categories allCategories={allCategories} />}
+      <Categories allCategories={allCategories} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
