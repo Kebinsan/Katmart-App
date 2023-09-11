@@ -4,7 +4,8 @@ body {
 
 nav {
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
+  font-size: 1em;
 }
 
 .nav-bar {
@@ -18,6 +19,7 @@ nav {
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 5px;
+  text-transform: uppercase;
 }
 
 .right-align-nav {
@@ -47,4 +49,36 @@ nav {
 
 .card {
   margin: 10px;
+}
+
+.product-click {
+  cursor: pointer;
+}
+
+.search-button {
+  border-style: none;
+  margin-top: -2px;
+}
+
+.category-container {
+  background-color: white;
+  box-shadow: 0px 2px 2px #96939b;
+}
+
+.categories-links {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 10%;
+  margin-right: 10%;
+  list-style-type: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.category {
+  z-index: 305;
+  position: relative;
+  white-space: nowrap;
+  cursor: pointer;
+  text-transform: uppercase;
 }

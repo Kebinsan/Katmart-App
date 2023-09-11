@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { loginUser, registerUser } from "../api/server";
 import { Form, Button } from "react-bootstrap";

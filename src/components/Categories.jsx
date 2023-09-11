@@ -1,12 +1,23 @@
-import { Link, Route, Routes } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 export default function Categories({ allCategories }) {
+  const navigate = useNavigate();
   return (
-    <div className="categories-nav">
-      {allCategories?.forEach((category) => {
-        console.log(category);
-        return <div className="category">{category}</div>;
-      })}
+    <div className="category-container">
+      <ul className="categories-links">
+        {allCategories.map((category) => {
+          return (
+            <li
+              key={category}
+              className="category"
+              onClick={() => {
+                navigate(`/products/${category}`);
+              }}
+            >
+              {category}
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }

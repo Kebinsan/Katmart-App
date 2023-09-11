@@ -1,21 +1,22 @@
 import { useState, useEffect } from "react";
-import { Route, Routes, Link, useNavigate } from "react-router-dom";
 import { fetchAllCategories, fetchAllProducts } from "./api/server";
+import Navigation from "./components/Navigation";
+import { Route, Routes } from "react-router-dom";
+/*Components*/
 import Home from "./components/Home";
-import Shop from "./components/Shop";
+import Products from "./components/Products";
 import AccountForm from "./components/AccountForm";
+import Profile from "./components/Profile";
+import ProductInfo from "./components/ProductInfo";
 import Categories from "./components/Categories";
-/*bootstrap*/
-import { Dropdown, Button } from "react-bootstrap";
-import { Cart3 } from "react-bootstrap-icons";
 
-function App() {
+export default function App() {
   const [allProducts, setAllProducts] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [token, setToken] = useState(
     window.localStorage.getItem("token") || null
   );
-  const navigate = useNavigate();
 
   /**
    * fetches all products
@@ -51,70 +52,34 @@ function App() {
     }
   }, [token]);
 
-  /**
-   * resets token when signing out
-   */
-  const signOut = () => {
-    setToken(null);
-    navigate("/");
-  };
-
-  /**
-   * sign in button handler, navigates to sign in form
-   */
-  const signIn = () => {
-    navigate("/account/signin");
-  };
-
   return (
     <>
-      <nav>
-        <div className="nav-bar">
-          <Link className="item" to="/">
-            Home
-          </Link>
-          <Link className="item" to="/shop">
-            Shop
-          </Link>
-          <div className="right-align-nav">
-            <div className="right-nav-content">
-              {token ? (
-                <>
-                  <Dropdown>
-                    <Dropdown.Toggle variant="White">Account</Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item>Profile</Dropdown.Item>
-                      <Dropdown.Divider />
-                      <Dropdown.Item onClick={signOut}>Sign Out</Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                  <Button variant="white">
-                    <Cart3 /> 0 {/*TODO*/}
-                  </Button>
-                </>
-              ) : (
-                <Link className="item" to="/account/signin" onClick={signIn}>
-                  Sign In
-                </Link>
-              )}
-            </div>
-          </div>
-        </div>
-      </nav>
+      {/*Navigation component*/}
+      <Navigation token={token} setToken={setToken} />
+      {/*Categories filter buttons component*/}
       <Categories allCategories={allCategories} />
+      {/*Routes*/}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="/shop"
-          element={<Shop allProducts={allProducts} token={token} />}
-        />
+        <Route path="/account/profile" element={<Profile />}></Route>
         <Route
           path="/account/:action"
           element={<AccountForm setToken={setToken} />}
+        />
+        <Route
+          path="/products/product/:id"
+          element={<ProductInfo product={selectedProduct} />}
+        />
+        <Route
+          path="/products/:category"
+          element={
+            <Products
+              allProducts={allProducts}
+              setSelectedProduct={setSelectedProduct}
+            />
+          }
         />
       </Routes>
     </>
   );
 }
-
-export default App;
