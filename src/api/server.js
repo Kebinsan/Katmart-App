@@ -20,11 +20,30 @@ export const fetchAllProducts = async () => {
 };
 
 /**
+ * FETCH ALL CATEGORIES
+ * @returns array of category objects
+ */
+export const fetchAllCategories = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/products/categories`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    console.error("Error /GET all products!", err);
+  }
+};
+
+/**
  * LOG-IN USER
  * @param {*} newUser object
  * @returns user object
  */
-export const registerUser = async (newUser) => {
+export const registerUser = async (email, username, password) => {
   try {
     const response = await fetch(`${BASE_URL}/users`, {
       method: "POST",
@@ -32,9 +51,9 @@ export const registerUser = async (newUser) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: newUser.email,
-        username: newUser.username,
-        password: newUser.password,
+        email,
+        username,
+        password,
       }),
     });
     const result = await response.json();
