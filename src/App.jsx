@@ -13,6 +13,7 @@ import Categories from "./components/Categories";
 export default function App() {
   const [allProducts, setAllProducts] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
+  const [category, setCategory] = useState("all");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [token, setToken] = useState(
     window.localStorage.getItem("token") || null
@@ -25,9 +26,9 @@ export default function App() {
     const getAllProducts = async () => {
       const result = await fetchAllProducts();
       setAllProducts(result);
-      console.log(allProducts);
     };
     getAllProducts();
+    console.log("initial fetch length " + allProducts.length);
   }, []);
 
   /**
@@ -40,6 +41,11 @@ export default function App() {
     };
     getAllCategories();
   }, []);
+
+  /**
+   * TODO
+   * Add get user data here when server is running
+   */
 
   /**
    * sets token in local storage
@@ -55,9 +61,14 @@ export default function App() {
   return (
     <>
       {/*Navigation component*/}
-      <Navigation token={token} setToken={setToken} />
+      <Navigation
+        token={token}
+        setToken={setToken}
+        setCategory={setCategory}
+        category={category}
+      />
       {/*Categories filter buttons component*/}
-      <Categories allCategories={allCategories} />
+      <Categories allCategories={allCategories} setCategory={setCategory} />
       {/*Routes*/}
       <Routes>
         <Route path="/" element={<Home />} />
@@ -72,6 +83,15 @@ export default function App() {
         />
         <Route
           path="/products/:category"
+          element={
+            <Products
+              allProducts={allProducts}
+              setSelectedProduct={setSelectedProduct}
+            />
+          }
+        />
+        <Route
+          path="/products/:category/:query"
           element={
             <Products
               allProducts={allProducts}

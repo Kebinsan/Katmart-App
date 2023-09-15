@@ -5,32 +5,52 @@ import Product from "./Product";
 export default function Products({ allProducts, setSelectedProduct }) {
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
   const { category } = useParams();
+  const { query } = useParams();
 
   useEffect(() => {
-    if (category && category !== "all") {
-      setFilteredProducts(
-        allProducts?.filter((product) => category === product.category)
-      );
+    if (category) {
+      if (category === "all") {
+        setFilteredProducts(allProducts);
+        //console.log("all");
+      } else {
+        setFilteredProducts(
+          allProducts?.filter((product) => category === product.category)
+        );
+        //console.log("category");
+      }
+      if (query) {
+        console.log(filteredProducts);
+        setFilteredProducts(
+          filteredProducts?.filter((product) =>
+            Object.values(product).some(
+              (val) => typeof val === "string" && val.includes(query)
+            )
+          )
+        );
+        //console.log(query);
+      }
     } else {
-      setFilteredProducts(allProducts);
+      console.log("error");
     }
-
-    console.log(allProducts);
   }, [category]);
 
   return (
     <>
       {/*renders all products*/}
       <div className="product-container">
-        {filteredProducts?.map((product) => {
-          return (
-            <Product
-              key={product.id}
-              product={product}
-              setSelectedProduct={setSelectedProduct}
-            />
-          );
-        })}
+        {filteredProducts?.length > 0 ? (
+          filteredProducts?.map((product) => {
+            return (
+              <Product
+                key={product.id}
+                product={product}
+                setSelectedProduct={setSelectedProduct}
+              />
+            );
+          })
+        ) : (
+          <div>No Results Found</div>
+        )}
       </div>
     </>
   );

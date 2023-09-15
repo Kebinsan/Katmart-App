@@ -6,11 +6,14 @@ nav {
   padding-top: 20px;
   padding-bottom: 15px;
   font-size: 1em;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .nav-bar {
   display: flex;
   text-decoration: none;
+  justify-content: space-between;
 }
 
 .item {
@@ -22,19 +25,16 @@ nav {
   text-transform: uppercase;
 }
 
-.right-align-nav {
+.right-nav-content {
   display: flex;
   flex-grow: 1;
   justify-content: flex-end;
 }
 
-.right-nav-content {
-  display: flex;
-}
-
 .product-container {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -81,4 +81,14 @@ nav {
   white-space: nowrap;
   cursor: pointer;
   text-transform: uppercase;
+}
+
+.search {
+  border-radius: 20px;
+  width: 30vw;
+}
+
+.search-container {
+  display: flex;
+  justify-content: flex-end;
 }

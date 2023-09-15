@@ -21,7 +21,7 @@ export default function Product({ product, setSelectedProduct }) {
           <Card.Title className="product-click">{product.title}</Card.Title>
         </div>
         <Card.Body>
-          <Card.Text>Rating: {product.rating.rate}</Card.Text>
+          <Card.Text>Rating: {product.rating?.rate}</Card.Text>
           <Card.Text>${product.price}</Card.Text>
         </Card.Body>
       </Card>

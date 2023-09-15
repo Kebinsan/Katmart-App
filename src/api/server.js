@@ -89,3 +89,23 @@ export const loginUser = async (username, password) => {
     console.error(err);
   }
 };
+
+/**TODO
+ * FETCH USER DATA
+ * @param {*} token
+ * @returns array of user data
+ */
+export const fetchUserData = async (token) => {
+  try {
+    const response = await fetch(`${BASE_URL}/users/me`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
