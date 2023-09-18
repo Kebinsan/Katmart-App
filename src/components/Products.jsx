@@ -23,7 +23,6 @@ export default function Products({ allProducts, setSelectedProduct, loading }) {
         );
       }
       if (query) {
-        console.log(filteredProducts);
         setFilteredProducts(
           filteredProducts?.filter((product) =>
             Object.values(product).some(

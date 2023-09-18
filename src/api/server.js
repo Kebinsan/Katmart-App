@@ -53,7 +53,6 @@ export const registerUser = async (user) => {
       body: JSON.stringify(user),
     });
     const result = await response.json();
-    console.log("registered" + result);
     return result;
   } catch (err) {
     console.error(err);
@@ -75,7 +74,6 @@ export const loginUser = async (user) => {
       body: JSON.stringify(user),
     });
     const result = await response.json();
-    console.log("logged In" + result);
     return result;
   } catch (err) {
     console.error(err);

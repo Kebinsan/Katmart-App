@@ -9,6 +9,7 @@ import AccountForm from "./components/AccountForm";
 import Profile from "./components/Profile";
 import ProductInfo from "./components/ProductInfo";
 import Categories from "./components/Categories";
+import { Spinner } from "react-bootstrap";
 
 export default function App() {
   const [allProducts, setAllProducts] = useState([]);
@@ -31,7 +32,6 @@ export default function App() {
       setLoading(false);
     };
     getAllProducts();
-    console.log("initial fetch length " + allProducts.length);
   }, [allProducts.length]);
 
   /**
@@ -73,7 +73,6 @@ export default function App() {
   }, [cart]);
   return (
     <>
-      {/*Navigation component*/}
       <Navigation
         token={token}
         setToken={setToken}
@@ -82,42 +81,54 @@ export default function App() {
         cart={cart}
       />
 
-      {/*Categories filter buttons component*/}
       <Categories allCategories={allCategories} setCategory={setCategory} />
-
-      {/*Routes*/}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/account/profile" element={<Profile />}></Route>
-        <Route
-          path="/account/:action"
-          element={<AccountForm setToken={setToken} />}
-        />
-        <Route
-          path="/products/product/:id"
-          element={<ProductInfo product={selectedProduct} setCart={setCart} />}
-        />
-        <Route
-          path="/products/:category"
-          element={
-            <Products
-              allProducts={allProducts}
-              setSelectedProduct={setSelectedProduct}
-              loading={loading}
-            />
-          }
-        />
-        <Route
-          path="/products/:category/:query"
-          element={
-            <Products
-              allProducts={allProducts}
-              setSelectedProduct={setSelectedProduct}
-              loading={loading}
-            />
-          }
-        />
-      </Routes>
+      {
+        /*displays loading spinner while waiting on products to fetch*/
+        loading ? (
+          <div className="loading">
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </div>
+        ) : (
+          <>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/account/profile" element={<Profile />}></Route>
+              <Route
+                path="/account/:action"
+                element={<AccountForm setToken={setToken} />}
+              />
+              <Route
+                path="/products/product/:id"
+                element={
+                  <ProductInfo product={selectedProduct} setCart={setCart} />
+                }
+              />
+              <Route
+                path="/products/:category"
+                element={
+                  <Products
+                    allProducts={allProducts}
+                    setSelectedProduct={setSelectedProduct}
+                    loading={loading}
+                  />
+                }
+              />
+              <Route
+                path="/products/:category/:query"
+                element={
+                  <Products
+                    allProducts={allProducts}
+                    setSelectedProduct={setSelectedProduct}
+                    loading={loading}
+                  />
+                }
+              />
+            </Routes>
+          </>
+        )
+      }
     </>
   );
 }
