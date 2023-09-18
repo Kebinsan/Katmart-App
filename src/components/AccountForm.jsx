@@ -4,9 +4,7 @@ import { loginUser, registerUser } from "../api/server";
 import { Form, Button } from "react-bootstrap";
 
 export default function AccountForm({ setToken }) {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [user, setUser] = useState({ email: "", username: "", password: "" });
   const [error, setError] = useState("");
   const { action } = useParams();
   const title = action === "signin" ? "Sign In" : "Sign Up";
@@ -16,12 +14,12 @@ export default function AccountForm({ setToken }) {
     event.preventDefault();
     let data = {};
     if (action === "register") {
-      data = await registerUser(email, username, password);
+      data = await registerUser(user);
       {
         /*TODO issue registering new account due to limited capabilities with api*/
       }
     } else {
-      data = await loginUser(username, password);
+      data = await loginUser(user);
     }
     if (data.token) {
       setToken(data.token);
@@ -30,6 +28,14 @@ export default function AccountForm({ setToken }) {
       setError("failed to sign in");
       console.log("error logging in");
     }
+  };
+
+  const handleChange = (event) => {
+    event.preventDefault();
+    setUser({
+      ...user,
+      [event.target.name]: event.target.value,
+    });
   };
 
   return (
@@ -41,7 +47,8 @@ export default function AccountForm({ setToken }) {
             <Form.Control
               type="email"
               placeholder="Enter email"
-              onChange={(event) => setEmail(event.target.value)}
+              name="email"
+              onChange={handleChange}
               required
             />
             <Form.Text className="text-muted">
@@ -54,7 +61,8 @@ export default function AccountForm({ setToken }) {
           <Form.Control
             type="text"
             placeholder="Enter username"
-            onChange={(event) => setUsername(event.target.value)}
+            name="username"
+            onChange={handleChange}
             required
           />
         </Form.Group>
@@ -64,7 +72,8 @@ export default function AccountForm({ setToken }) {
           <Form.Control
             type="password"
             placeholder="Password"
-            onChange={(event) => setPassword(event.target.value)}
+            name="password"
+            onChange={handleChange}
             required
           />
         </Form.Group>

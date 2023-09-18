@@ -39,22 +39,18 @@ export const fetchAllCategories = async () => {
 };
 
 /**
- * LOG-IN USER
- * @param {*} newUser object
+ * REGISTER USER
+ * @param {*} user object
  * @returns user object
  */
-export const registerUser = async (email, username, password) => {
+export const registerUser = async (user) => {
   try {
     const response = await fetch(`${BASE_URL}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email,
-        username,
-        password,
-      }),
+      body: JSON.stringify(user),
     });
     const result = await response.json();
     console.log("registered" + result);
@@ -66,21 +62,17 @@ export const registerUser = async (email, username, password) => {
 
 /**
  * LOG-IN USER
- * @param {*} username
- * @param {*} password
+ * @param {*} user object
  * @returns user object
  */
-export const loginUser = async (username, password) => {
+export const loginUser = async (user) => {
   try {
     const response = await fetch(`${BASE_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
+      body: JSON.stringify(user),
     });
     const result = await response.json();
     console.log("logged In" + result);

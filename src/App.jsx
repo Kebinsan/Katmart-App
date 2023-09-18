@@ -18,6 +18,8 @@ export default function App() {
   const [token, setToken] = useState(
     window.localStorage.getItem("token") || null
   );
+  const [loading, setLoading] = useState(true);
+  const [cart, setCart] = useState(window.localStorage.getItem("cart") || null);
 
   /**
    * fetches all products
@@ -26,10 +28,11 @@ export default function App() {
     const getAllProducts = async () => {
       const result = await fetchAllProducts();
       setAllProducts(result);
+      setLoading(false);
     };
     getAllProducts();
     console.log("initial fetch length " + allProducts.length);
-  }, []);
+  }, [allProducts.length]);
 
   /**
    * fetches all categories
@@ -58,6 +61,16 @@ export default function App() {
     }
   }, [token]);
 
+  /**
+   * sets cart in local storage
+   */
+  useEffect(() => {
+    if (cart) {
+      window.localStorage.setItem("cart", cart);
+    } else {
+      window.localStorage.removeItem("cart");
+    }
+  }, [cart]);
   return (
     <>
       {/*Navigation component*/}
@@ -66,9 +79,12 @@ export default function App() {
         setToken={setToken}
         setCategory={setCategory}
         category={category}
+        cart={cart}
       />
+
       {/*Categories filter buttons component*/}
       <Categories allCategories={allCategories} setCategory={setCategory} />
+
       {/*Routes*/}
       <Routes>
         <Route path="/" element={<Home />} />
@@ -79,7 +95,7 @@ export default function App() {
         />
         <Route
           path="/products/product/:id"
-          element={<ProductInfo product={selectedProduct} />}
+          element={<ProductInfo product={selectedProduct} setCart={setCart} />}
         />
         <Route
           path="/products/:category"
@@ -87,6 +103,7 @@ export default function App() {
             <Products
               allProducts={allProducts}
               setSelectedProduct={setSelectedProduct}
+              loading={loading}
             />
           }
         />
@@ -96,6 +113,7 @@ export default function App() {
             <Products
               allProducts={allProducts}
               setSelectedProduct={setSelectedProduct}
+              loading={loading}
             />
           }
         />

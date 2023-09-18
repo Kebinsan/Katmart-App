@@ -2,9 +2,15 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 /*Bootstrap*/
 import { Dropdown, Button } from "react-bootstrap";
-import { Cart3, Search } from "react-bootstrap-icons";
+import { Cart, Cart3, Search } from "react-bootstrap-icons";
 
-export default function Navigation({ token, setToken, setCategory, category }) {
+export default function Navigation({
+  token,
+  setToken,
+  setCategory,
+  category,
+  cart,
+}) {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState(null);
   /**
@@ -82,13 +88,13 @@ export default function Navigation({ token, setToken, setCategory, category }) {
                     </Dropdown.Menu>
                   </Dropdown>
                   <Button variant="white">
-                    <Cart3 /> 0 {/*TODO*/}
+                    <Cart3 /> 0
                   </Button>
                 </>
               ) : (
-                <Link className="item" to="/account/signin" onClick={signIn}>
+                <Button variant="outline-dark" onClick={signIn}>
                   Sign In
-                </Link>
+                </Button>
               )}
             </div>
           </div>

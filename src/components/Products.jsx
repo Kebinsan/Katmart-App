@@ -1,22 +1,26 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Product from "./Product";
+import { Spinner } from "react-bootstrap";
 
-export default function Products({ allProducts, setSelectedProduct }) {
+export default function Products({ allProducts, setSelectedProduct, loading }) {
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
   const { category } = useParams();
   const { query } = useParams();
 
+  /**
+   * Filters the displayed products
+   * depending on category filter as
+   * well as searched query
+   */
   useEffect(() => {
     if (category) {
       if (category === "all") {
         setFilteredProducts(allProducts);
-        //console.log("all");
       } else {
         setFilteredProducts(
           allProducts?.filter((product) => category === product.category)
         );
-        //console.log("category");
       }
       if (query) {
         console.log(filteredProducts);
@@ -27,7 +31,6 @@ export default function Products({ allProducts, setSelectedProduct }) {
             )
           )
         );
-        //console.log(query);
       }
     } else {
       console.log("error");
@@ -36,22 +39,32 @@ export default function Products({ allProducts, setSelectedProduct }) {
 
   return (
     <>
-      {/*renders all products*/}
-      <div className="product-container">
-        {filteredProducts?.length > 0 ? (
-          filteredProducts?.map((product) => {
-            return (
-              <Product
-                key={product.id}
-                product={product}
-                setSelectedProduct={setSelectedProduct}
-              />
-            );
-          })
+      {
+        /*displays loading spinner while waiting on products to fetch*/
+        loading ? (
+          <div className="loading">
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </div>
         ) : (
-          <div>No Results Found</div>
-        )}
-      </div>
+          <div className="product-container">
+            {filteredProducts.length > 0 ? (
+              filteredProducts.map((product) => {
+                return (
+                  <Product
+                    key={product.id}
+                    product={product}
+                    setSelectedProduct={setSelectedProduct}
+                  />
+                );
+              })
+            ) : (
+              <div>No Results Found</div>
+            )}
+          </div>
+        )
+      }
     </>
   );
 }
