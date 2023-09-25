@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Product from "./Product";
 import { Spinner } from "react-bootstrap";
 
-export default function Products({ allProducts, setSelectedProduct, loading }) {
+export default function Products({ allProducts, loading }) {
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
   const { category } = useParams();
   const { query } = useParams();
@@ -50,13 +50,7 @@ export default function Products({ allProducts, setSelectedProduct, loading }) {
           <div className="product-container">
             {filteredProducts.length > 0 ? (
               filteredProducts.map((product) => {
-                return (
-                  <Product
-                    key={product.id}
-                    product={product}
-                    setSelectedProduct={setSelectedProduct}
-                  />
-                );
+                return <Product key={product.id} product={product} />;
               })
             ) : (
               <div>No Results Found</div>

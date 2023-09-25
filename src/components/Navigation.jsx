@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 /*Bootstrap*/
 import { Dropdown, Button } from "react-bootstrap";
-import { Cart, Cart3, Search } from "react-bootstrap-icons";
+import { Cart3, Search } from "react-bootstrap-icons";
 
 export default function Navigation({
   token,
   setToken,
   setCategory,
   category,
-  cart,
+  cartQuantity,
 }) {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState(null);
+
   /**
    * resets token when signing out
    */
@@ -74,7 +75,9 @@ export default function Navigation({
               {token ? (
                 <>
                   <Dropdown>
-                    <Dropdown.Toggle variant="White">Account</Dropdown.Toggle>
+                    <Dropdown.Toggle className="account-nav" variant="White">
+                      Account
+                    </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Dropdown.Item
                         onClick={() => {
@@ -87,8 +90,13 @@ export default function Navigation({
                       <Dropdown.Item onClick={signOut}>Sign Out</Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
-                  <Button variant="white">
-                    <Cart3 /> 0
+                  <Button
+                    className="cart-button"
+                    variant="white"
+                    onClick={() => navigate("/cart")}
+                  >
+                    <Cart3 />
+                    <span> {cartQuantity}</span>
                   </Button>
                 </>
               ) : (

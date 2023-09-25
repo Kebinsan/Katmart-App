@@ -20,6 +20,25 @@ export const fetchAllProducts = async () => {
 };
 
 /**
+ * FETCH SINGLE PRODUCT
+ * @returns single product object
+ */
+export const fetchProduct = async (id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/products/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    console.error("Error /GET single product!", err);
+  }
+};
+
+/**
  * FETCH ALL CATEGORIES
  * @returns array of category objects
  */
@@ -34,7 +53,7 @@ export const fetchAllCategories = async () => {
     const result = await response.json();
     return result;
   } catch (err) {
-    console.error("Error /GET all products!", err);
+    console.error("Error /GET all categories!", err);
   }
 };
 
@@ -55,7 +74,7 @@ export const registerUser = async (user) => {
     const result = await response.json();
     return result;
   } catch (err) {
-    console.error(err);
+    console.error("Error /POST user object!", err);
   }
 };
 
@@ -76,7 +95,7 @@ export const loginUser = async (user) => {
     const result = await response.json();
     return result;
   } catch (err) {
-    console.error(err);
+    console.error("Error /POST user login object!", err);
   }
 };
 
@@ -96,6 +115,6 @@ export const fetchUserData = async (token) => {
     const result = await response.json();
     return result;
   } catch (err) {
-    console.log(err);
+    console.log("Error /GET user data!", err);
   }
 };

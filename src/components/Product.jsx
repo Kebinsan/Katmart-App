@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Rating from "./Rating";
 
-export default function Product({ product, setSelectedProduct }) {
+export default function Product({ product }) {
   const navigate = useNavigate();
   return (
     <>
@@ -10,7 +10,6 @@ export default function Product({ product, setSelectedProduct }) {
         <div
           className="product-click"
           onClick={() => {
-            setSelectedProduct(product);
             navigate(`/products/product/${product.id}`);
           }}
         >
