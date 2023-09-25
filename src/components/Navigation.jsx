@@ -47,29 +47,30 @@ export default function Navigation({
               Shop
             </Link>
           </div>
-          <form
-            className="search-container"
-            onSubmit={() => {
-              navigate(`/products/${category}/${searchQuery}`);
-            }}
-          >
-            <input
-              className="search"
-              type="text"
-              placeholder="search"
-              onChange={(event) => {
-                setSearchQuery(event.target.value);
+          <div className="search-container">
+            <form
+              onSubmit={() => {
+                navigate(`/products/${category}/${searchQuery}`);
               }}
-            />
-            <Button
-              className="search-button"
-              variant="outline-primary"
-              size="sm"
-              type="submit"
             >
-              <Search />
-            </Button>
-          </form>
+              <input
+                className="search"
+                type="text"
+                placeholder="search"
+                onChange={(event) => {
+                  setSearchQuery(event.target.value);
+                }}
+              />
+              <Button
+                className="search-button"
+                variant="outline-primary"
+                size="sm"
+                type="submit"
+              >
+                <Search />
+              </Button>
+            </form>
+          </div>
           <div className="right-align-nav">
             <div className="right-nav-content">
               {token ? (
@@ -90,20 +91,20 @@ export default function Navigation({
                       <Dropdown.Item onClick={signOut}>Sign Out</Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
-                  <Button
-                    className="cart-button"
-                    variant="white"
-                    onClick={() => navigate("/cart")}
-                  >
-                    <Cart3 />
-                    <span> {cartQuantity}</span>
-                  </Button>
                 </>
               ) : (
                 <Button variant="outline-dark" onClick={signIn}>
                   Sign In
                 </Button>
               )}
+              <Button
+                className="cart-button"
+                variant="white"
+                onClick={() => navigate("/cart")}
+              >
+                <Cart3 />
+                <span>{cartQuantity}</span>
+              </Button>
             </div>
           </div>
         </div>

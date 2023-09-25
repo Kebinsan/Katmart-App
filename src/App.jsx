@@ -83,6 +83,7 @@ export default function App() {
         return acc + curr.quantity;
       }, 0)
     );
+    window.localStorage.setItem("cart", JSON.stringify(cart));
   }, [cartUpdated]);
 
   /**
@@ -123,7 +124,14 @@ export default function App() {
               <Route path="/account/profile" element={<Profile />} />
               <Route
                 path="/cart"
-                element={<Cart cart={cart} setCart={setCart} />}
+                element={
+                  <Cart
+                    cart={cart}
+                    setCart={setCart}
+                    setCartUpdated={setCartUpdated}
+                    cartUpdated={cartUpdated}
+                  />
+                }
               />
               <Route
                 path="/account/:action"

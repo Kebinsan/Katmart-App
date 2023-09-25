@@ -40,7 +40,13 @@ export default function AccountForm({ setToken }) {
 
   return (
     <>
-      <Form onSubmit={onSubmitHandler}>
+      <h1 className="page-title">{title}</h1>
+      {error && (
+        <div>
+          username or password is incorrect
+        </div>
+      )}
+      <Form className="account-form" onSubmit={onSubmitHandler}>
         {title === "Sign Up" && (
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
@@ -82,17 +88,23 @@ export default function AccountForm({ setToken }) {
             <Form.Check type="checkbox" label="I am not a robot" required />
           </Form.Group>
         )}
-        {title === "Sign In" && (
-          <>
-            <Form.Text className="text-muted">Need an Account? </Form.Text>
-            <Link className="create-account" to="/account/register">
-              Create Account
-            </Link>
-          </>
-        )}
-        <Button className="account-form-submit" variant="primary" type="submit">
-          Submit
-        </Button>
+        <div className="account-form-submit">
+          {title === "Sign In" && (
+            <>
+              <Form.Text className="text-muted">Need an Account? </Form.Text>
+              <Link className="create-account" to="/account/register">
+                Create Account
+              </Link>
+            </>
+          )}
+          <Button
+            className="account-form-submit"
+            variant="primary"
+            type="submit"
+          >
+            Submit
+          </Button>
+        </div>
       </Form>
     </>
   );
