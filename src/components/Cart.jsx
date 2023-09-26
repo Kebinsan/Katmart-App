@@ -28,9 +28,10 @@ export default function Cart({ cart, setCart, cartUpdated, setCartUpdated }) {
             ) : (
               <div>No Results Found</div>
             )}
+
+            <div>${cartTotal}</div>
+            <button onClick={() => setCart([])}>Clear Cart</button>
           </div>
-          <div>${cartTotal}</div>
-          <button onClick={() => setCart([])}>Clear Cart</button>
         </>
       ) : (
         <h1 className="page-title">No items in Cart</h1>

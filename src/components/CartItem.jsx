@@ -58,6 +58,7 @@ export default function CartItem({
             </h5>
             <p>${product.price}</p>
             <form>
+              <label htmlFor="quantity">QTY: </label>
               <input
                 type="number"
                 id="quantity"

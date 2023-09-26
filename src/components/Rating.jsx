@@ -6,11 +6,11 @@ export default function Rating({ rating }) {
     const stars = [];
     for (let i = 1; i <= maxRating; i++) {
       if (i <= rating.rate) {
-        stars.push(<StarFill key={i} color="orange" size="18" />);
+        stars.push(<StarFill key={i} color="#672934" size="18" />);
       } else if (i - rating.rate <= 0.5) {
-        stars.push(<StarHalf key={i} color="orange" size="18" />);
+        stars.push(<StarHalf key={i} color="#672934" size="18" />);
       } else {
-        stars.push(<Star key={i} color="orange" size="18" />);
+        stars.push(<Star key={i} color="#672934" size="18" />);
       }
     }
     return stars;

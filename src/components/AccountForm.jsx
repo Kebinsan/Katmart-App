@@ -41,11 +41,7 @@ export default function AccountForm({ setToken }) {
   return (
     <>
       <h1 className="page-title">{title}</h1>
-      {error && (
-        <div>
-          username or password is incorrect
-        </div>
-      )}
+      {error && <div>username or password is incorrect</div>}
       <Form className="account-form" onSubmit={onSubmitHandler}>
         {title === "Sign Up" && (
           <Form.Group className="mb-3" controlId="formBasicEmail">
