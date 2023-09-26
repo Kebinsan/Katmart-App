@@ -33,7 +33,7 @@ export default function Navigation({
     <>
       <nav>
         <div className="nav-bar">
-          <div>
+          <div className="left-nav-content">
             <Link className="item logo" to="/">
               KatMart
             </Link>
@@ -67,7 +67,7 @@ export default function Navigation({
                 size="sm"
                 type="submit"
               >
-                <Search />
+                <Search className="search-icon" />
               </Button>
             </form>
           </div>
@@ -93,17 +93,13 @@ export default function Navigation({
                   </Dropdown>
                 </>
               ) : (
-                <Button variant="outline-dark" onClick={signIn}>
+                <Button variant="outline-light sign-in-nav" onClick={signIn}>
                   Sign In
                 </Button>
               )}
-              <Button
-                className="cart-button"
-                variant="white"
-                onClick={() => navigate("/cart")}
-              >
+              <Button className="cart-button" onClick={() => navigate("/cart")}>
                 <Cart3 />
-                <span>{cartQuantity}</span>
+                <span> {cartQuantity}</span>
               </Button>
             </div>
           </div>

@@ -47,15 +47,18 @@ export default function Products({ allProducts, loading }) {
             </Spinner>
           </div>
         ) : (
-          <div className="product-container">
-            {filteredProducts.length > 0 ? (
-              filteredProducts.map((product) => {
-                return <Product key={product.id} product={product} />;
-              })
-            ) : (
-              <div>No Results Found</div>
-            )}
-          </div>
+          <>
+            <h3 className="page-title">{category}</h3>
+            <div className="product-container">
+              {filteredProducts.length > 0 ? (
+                filteredProducts.map((product) => {
+                  return <Product key={product.id} product={product} />;
+                })
+              ) : (
+                <div>No Results Found</div>
+              )}
+            </div>
+          </>
         )
       }
     </>
