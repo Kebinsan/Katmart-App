@@ -24,11 +24,19 @@ export default function CartItem({
       const result = await fetchProduct(item.id);
       setProduct(result);
 
-      setCartTotal(cartTotal + product?.price * item.quantity);
       setLoading(false);
     };
     getItem();
   }, []);
+
+  /**
+   * adds up the total cost of items in the cart after products are done loading
+   */
+  useEffect(() => {
+    if (!loading) {
+      setCartTotal(cartTotal + product?.price * item.quantity);
+    }
+  }, [loading]);
 
   const removeHandler = () => {
     setCart(cart.filter((obj) => parseInt(obj.id) !== product.id));

@@ -52,11 +52,6 @@ export default function App() {
   }, []);
 
   /**
-   * TODO
-   * Add get user data here when server is running
-   */
-
-  /**
    * sets token in local storage
    */
   useEffect(() => {
@@ -92,6 +87,7 @@ export default function App() {
 
   return (
     <>
+      {/*Main nav bar*/}
       <Navigation
         token={token}
         setToken={setToken}
@@ -100,7 +96,7 @@ export default function App() {
         cart={cart}
         cartQuantity={cartQuantity}
       />
-
+      {/*links to view specific categories of products*/}
       <Categories allCategories={allCategories} setCategory={setCategory} />
       {
         /*displays loading spinner while waiting on products to fetch*/
@@ -144,7 +140,7 @@ export default function App() {
                 }
               />
               <Route
-                path="/products/:category/:query"
+                path="/products/search/:query"
                 element={
                   <Products allProducts={allProducts} loading={loading} />
                 }

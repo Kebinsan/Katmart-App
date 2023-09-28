@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 /*Bootstrap*/
 import { Dropdown, Button } from "react-bootstrap";
@@ -8,7 +8,6 @@ export default function Navigation({
   token,
   setToken,
   setCategory,
-  category,
   cartQuantity,
 }) {
   const navigate = useNavigate();
@@ -50,7 +49,7 @@ export default function Navigation({
           <div className="search-container">
             <form
               onSubmit={() => {
-                navigate(`/products/${category}/${searchQuery}`);
+                navigate(`/products/search/${searchQuery}`);
               }}
             >
               <input
@@ -76,7 +75,10 @@ export default function Navigation({
               {token ? (
                 <>
                   <Dropdown>
-                    <Dropdown.Toggle className="account-nav" variant="White">
+                    <Dropdown.Toggle
+                      className="account-nav"
+                      variant="outline-light"
+                    >
                       Account
                     </Dropdown.Toggle>
                     <Dropdown.Menu>

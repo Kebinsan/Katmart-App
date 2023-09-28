@@ -1,9 +1,10 @@
 import { useState } from "react";
 import CartItem from "./CartItem";
+import { Button } from "react-bootstrap";
 
 export default function Cart({ cart, setCart, cartUpdated, setCartUpdated }) {
   const [cartTotal, setCartTotal] = useState(0);
-  console.log(cartTotal);
+
   return (
     <>
       {cart.length > 0 ? (
@@ -29,12 +30,24 @@ export default function Cart({ cart, setCart, cartUpdated, setCartUpdated }) {
               <div>No Results Found</div>
             )}
 
-            <div>${cartTotal}</div>
-            <button onClick={() => setCart([])}>Clear Cart</button>
+            <div className="cart-summary">
+              <p className="clear-cart" onClick={() => setCart([])}>
+                Clear Cart
+              </p>
+
+              <div className="cart-summary-items">
+                <h5 className="cart-total-cost">
+                  Total Cost: ${cartTotal.toFixed(2)}
+                </h5>
+                <Button className="checkout-button" variant="btn btn-success">
+                  Check Out
+                </Button>
+              </div>
+            </div>
           </div>
         </>
       ) : (
-        <h1 className="page-title">No items in Cart</h1>
+        <h1 className="page-title">Cart Empty</h1>
       )}
     </>
   );

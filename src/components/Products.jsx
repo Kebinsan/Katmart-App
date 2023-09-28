@@ -23,17 +23,15 @@ export default function Products({ allProducts, loading }) {
           allProducts?.filter((product) => category === product.category)
         );
       }
-      if (query) {
-        setFilteredProducts(
-          filteredProducts?.filter((product) =>
-            Object.values(product).some(
-              (val) => typeof val === "string" && val.includes(query)
-            )
+    }
+    if (query) {
+      setFilteredProducts(
+        filteredProducts?.filter((product) =>
+          Object.values(product).some(
+            (val) => typeof val === "string" && val.includes(query)
           )
-        );
-      }
-    } else {
-      console.log("error");
+        )
+      );
     }
   }, [category]);
 
@@ -48,6 +46,7 @@ export default function Products({ allProducts, loading }) {
             <div className="trail-container">
               <Trail category={category} />
             </div>
+
             <div className="product-container">
               {filteredProducts.length > 0 ? (
                 filteredProducts.map((product) => {

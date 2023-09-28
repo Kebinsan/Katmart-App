@@ -84,12 +84,21 @@ export default function AccountForm({ setToken }) {
             <Form.Check type="checkbox" label="I am not a robot" required />
           </Form.Group>
         )}
-        <div className="account-form-submit">
-          {title === "Sign In" && (
+        <div className="account-form-submit-container">
+          {title === "Sign In" ? (
             <>
               <Form.Text className="text-muted">Need an Account? </Form.Text>
               <Link className="create-account" to="/account/register">
                 Create Account
+              </Link>
+            </>
+          ) : (
+            <>
+              <Form.Text className="text-muted">
+                Already have an account?{" "}
+              </Form.Text>
+              <Link className="create-account" to="/account/signin">
+                Sign In
               </Link>
             </>
           )}

@@ -14,6 +14,7 @@ export default function ProductInfo({
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
+
   const { id } = useParams();
 
   /**

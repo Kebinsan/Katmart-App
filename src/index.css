@@ -8,20 +8,25 @@ body {
 }
 
 .account-form {
-  text-align: center;
   margin-left: 20%;
   margin-right: 20%;
 }
 .account-form-field {
   max-width: 400px;
 }
-
-.account-form-submit {
+.account-form-submit-container {
   text-align: center;
+  font-size: 1.2em;
 }
 
 .create-account {
   margin-right: 20px;
+  color: #986e75;
+  text-decoration: none;
+}
+
+.create-account:hover {
+  text-decoration: underline;
 }
 
 nav {
@@ -56,12 +61,12 @@ nav {
 }
 
 .sign-in-nav {
-  border-color: #cab3b6;
+  border-color: white;
 }
 
 .sign-in-nav:hover {
-  background-color: #cab3b6;
-  border-color: #cab3b6;
+  background-color: white;
+  border-color: white;
   color: black;
 }
 
@@ -112,7 +117,7 @@ nav {
 }
 
 .card-img-top:hover {
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .card {
@@ -253,6 +258,7 @@ nav {
   width: 3em;
   margin-right: 10px;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .product-overview {
@@ -292,7 +298,8 @@ nav {
 
 .cart-item img,
 .cart-info h5,
-.delete-button {
+.delete-button,
+.clear-cart {
   cursor: pointer;
 }
 
@@ -301,12 +308,16 @@ nav {
 }
 
 .delete-button {
-  display: inline-block;
   margin-top: 10px;
-  color: #672934;
+  color: #986e75;
 }
 
-.delete-button:hover {
+.clear-cart {
+  color: #986e75;
+  font-size: 1.2em;
+}
+.delete-button:hover,
+.clear-cart:hover {
   text-decoration: underline;
 }
 
@@ -333,4 +344,32 @@ nav {
 .trail-container {
   display: flex;
   margin-left: 15%;
+}
+
+.checkout-button {
+  height: 45px;
+  margin-right: 20px;
+}
+
+.cart-summary {
+  display: flex;
+  padding-bottom: 30px;
+}
+
+.cart-summary-items {
+  flex-grow: 1;
+  width: 400px;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.cart-total-cost {
+  padding-top: 8px;
+  margin-right: 20px;
+}
+
+.clear-cart {
+  margin-left: 20px;
+  padding-top: 8px;
 }
