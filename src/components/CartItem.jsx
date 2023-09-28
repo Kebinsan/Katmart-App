@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchProduct } from "../api/server";
-import { Spinner } from "react-bootstrap";
+import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
 
 export default function CartItem({
@@ -16,10 +16,14 @@ export default function CartItem({
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  /**
+   * fetch product for additional product info
+   */
   useEffect(() => {
     const getItem = async () => {
       const result = await fetchProduct(item.id);
       setProduct(result);
+
       setCartTotal(cartTotal + product?.price * item.quantity);
       setLoading(false);
     };
@@ -34,11 +38,7 @@ export default function CartItem({
   return (
     <>
       {loading ? (
-        <div className="loading">
-          <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
-        </div>
+        <Loading loading={loading} />
       ) : (
         <div className="cart-item">
           <img
