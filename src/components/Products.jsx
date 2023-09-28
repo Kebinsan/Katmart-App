@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Product from "./Product";
-import { Spinner } from "react-bootstrap";
+import Trail from "./Trail";
+import Loading from "./Loading";
 
 export default function Products({ allProducts, loading }) {
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
@@ -41,14 +42,12 @@ export default function Products({ allProducts, loading }) {
       {
         /*displays loading spinner while waiting on products to fetch*/
         loading ? (
-          <div className="loading">
-            <Spinner animation="border" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </Spinner>
-          </div>
+          <Loading loading={loading} />
         ) : (
           <>
-            <h3 className="page-title">{category}</h3>
+            <div className="trail-container">
+              <Trail category={category} />
+            </div>
             <div className="product-container">
               {filteredProducts.length > 0 ? (
                 filteredProducts.map((product) => {

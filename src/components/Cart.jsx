@@ -3,7 +3,7 @@ import CartItem from "./CartItem";
 
 export default function Cart({ cart, setCart, cartUpdated, setCartUpdated }) {
   const [cartTotal, setCartTotal] = useState(0);
-
+  console.log(cartTotal);
   return (
     <>
       {cart.length > 0 ? (

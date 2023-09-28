@@ -10,7 +10,7 @@ import Profile from "./components/Profile";
 import ProductInfo from "./components/ProductInfo";
 import Categories from "./components/Categories";
 import Cart from "./components/Cart";
-import { Spinner } from "react-bootstrap";
+import Loading from "./components/Loading";
 
 export default function App() {
   const [allProducts, setAllProducts] = useState([]);
@@ -23,10 +23,11 @@ export default function App() {
   const [cart, setCart] = useState(
     JSON.parse(window.localStorage.getItem("cart")) || []
   );
+  //cart quantity for nav display
   const [cartQuantity, setCartQuantity] = useState(0);
+  //when cart is updated including values, cart is reloaded in useEffect
   const [cartUpdated, setCartUpdated] = useState(false);
 
-  console.log(cart);
   /**
    * fetches all products
    */
@@ -66,6 +67,9 @@ export default function App() {
     }
   }, [token]);
 
+  /**
+   * sets cart in local storage
+   */
   useEffect(() => {
     if (cart) {
       window.localStorage.setItem("cart", JSON.stringify(cart));
@@ -86,17 +90,6 @@ export default function App() {
     window.localStorage.setItem("cart", JSON.stringify(cart));
   }, [cartUpdated]);
 
-  /**
-   * sets cart in local storage
-   */
-  // useEffect(() => {
-  //   if (cart) {
-  //     window.localStorage.setItem("cart", cart);
-  //   } else {
-  //     window.localStorage.removeItem("cart");
-  //   }
-  // }, [cart]);
-
   return (
     <>
       <Navigation
@@ -112,11 +105,7 @@ export default function App() {
       {
         /*displays loading spinner while waiting on products to fetch*/
         loading ? (
-          <div className="loading">
-            <Spinner animation="border" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </Spinner>
-          </div>
+          <Loading loading={loading} />
         ) : (
           <>
             <Routes>
