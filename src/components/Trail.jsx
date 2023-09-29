@@ -17,7 +17,7 @@ export default function Trail({ category }) {
           >
             all
           </span>
-          /{category}
+          / {category}
         </p>
       )}
     </>

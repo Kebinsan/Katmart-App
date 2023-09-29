@@ -3,11 +3,18 @@ import { useParams } from "react-router-dom";
 import Product from "./Product";
 import Trail from "./Trail";
 import Loading from "./Loading";
+import { FilterRight } from "react-bootstrap-icons";
+import Canvas from "./Canvas";
+import Sort from "./Sort";
 
 export default function Products({ allProducts, loading }) {
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
   const { category } = useParams();
   const { query } = useParams();
+  const [show, setShow] = useState(false);
+  const [reRender, setReRender] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   /**
    * Filters the displayed products
@@ -35,6 +42,13 @@ export default function Products({ allProducts, loading }) {
     }
   }, [category]);
 
+  /**
+   * re-renders this component so that sort works
+   */
+  useEffect(() => {
+    setReRender(false);
+  }, [reRender]);
+
   return (
     <>
       {
@@ -43,10 +57,26 @@ export default function Products({ allProducts, loading }) {
           <Loading loading={loading} />
         ) : (
           <>
-            <div className="trail-container">
-              <Trail category={category} />
-            </div>
+            <div className="trail-filter-container">
+              <div className="trail-container">
+                <Trail category={category} />
+              </div>
 
+              <div className="filter-icon">
+                <Sort
+                  products={filteredProducts}
+                  setProducts={setFilteredProducts}
+                  setReRender={setReRender}
+                />
+                <FilterRight color="#672934" onClick={handleShow} />
+              </div>
+            </div>
+            <Canvas
+              handleClose={handleClose}
+              show={show}
+              products={filteredProducts}
+              setProducts={setFilteredProducts}
+            />
             <div className="product-container">
               {filteredProducts.length > 0 ? (
                 filteredProducts.map((product) => {

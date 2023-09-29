@@ -331,6 +331,7 @@ nav {
 .page-trail {
   font-weight: 400;
   font-size: 1.3em;
+  margin-top: -4px;
 }
 .trail-link {
   cursor: pointer;
@@ -344,6 +345,19 @@ nav {
 .trail-container {
   display: flex;
   margin-left: 15%;
+}
+
+.trail-filter-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter-icon {
+  display: flex;
+  margin-right: 15%;
+  font-size: 2em;
+  margin-top: -8px;
+  cursor: pointer;
 }
 
 .checkout-button {
@@ -372,4 +386,12 @@ nav {
 .clear-cart {
   margin-left: 20px;
   padding-top: 8px;
+}
+
+.sort-form {
+  width: 120px;
+  margin-right: 20px;
+  font-size: 0.3em;
+  height: 30px;
+  margin-top: 4px;
 }
