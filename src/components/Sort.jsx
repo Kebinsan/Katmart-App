@@ -1,5 +1,4 @@
 import Form from "react-bootstrap/Form";
-
 /**
  * I know reusing similar code over and over is bad design
  * however I was unable to figure out a way to do this without
@@ -8,7 +7,7 @@ import Form from "react-bootstrap/Form";
  * switch options and a couple other methods
  */
 
-export default function Sort({ products, setProducts, setReRender }) {
+export default function Sort({ products, setProducts, reRender, setReRender }) {
   const onChangeHandler = (event) => {
     switch (event.target.value) {
       case "0":
