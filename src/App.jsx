@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchAllCategories, fetchAllProducts } from "./api/server";
+import { fetchAllCategories } from "./api/server";
+import { fetchAllProducts } from "./api/api";
 import Navigation from "./components/Navigation";
 import { Route, Routes } from "react-router-dom";
 /*Components*/

@@ -69,7 +69,8 @@ nav {
 }
 
 .account-nav:hover {
-  background-color: #cab3b6;
+  background-color: white;
+  border-color: white;
 }
 
 .sign-in-nav {

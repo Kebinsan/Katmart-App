@@ -41,3 +41,21 @@ export const loginUser = async (user) => {
     console.error("Error /POST user login object!", err);
   }
 };
+
+/**
+ * FETCH ALL PRODUCTS
+ * @returns array of product objects
+ */
+export const fetchAllProducts = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/products`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+    return result.rows;
+  } catch (err) {
+    console.error("Error /GET all products!", err);
+  }
+};
