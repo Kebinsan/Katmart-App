@@ -31,7 +31,7 @@ export default function Cart({ cart, setCart, cartUpdated, setCartUpdated }) {
             )}
 
             <div className="cart-summary">
-              <p className="clear-cart" onClick={() => setCart([])}>
+              <p className="link-style clear" onClick={() => setCart([])}>
                 Clear Cart
               </p>
 

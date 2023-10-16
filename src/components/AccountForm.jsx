@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { loginUser, registerUser } from "../api/api";
 import { Form, Button } from "react-bootstrap";
@@ -14,6 +14,7 @@ export default function AccountForm({ setToken }) {
   });
   const [message, setMessage] = useState(null);
   const [success, setSuccess] = useState(false);
+
   const { action } = useParams();
   const Navigate = useNavigate();
   const title = action === "signin" ? "Sign In" : "Sign Up";
@@ -44,6 +45,10 @@ export default function AccountForm({ setToken }) {
     }
   };
 
+  /**
+   * @param {*} event
+   * sets the form values to a user object state
+   */
   const handleChange = (event) => {
     event.preventDefault();
     setUser({
@@ -80,7 +85,7 @@ export default function AccountForm({ setToken }) {
       )}
 
       {/*account form fields*/}
-      <div className="acc-form-container">
+      <div className="account-form-container">
         <Form className="account-form" onSubmit={onSubmitHandler}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
@@ -114,28 +119,30 @@ export default function AccountForm({ setToken }) {
               onChange={handleChange}
             />
           </Form.Group>
+          {/*Verify password and robot check form field only displays on signup page*/}
           {title === "Sign Up" && (
-            <Form.Group className="mb-3" controlId="password2">
-              <Form.Label>Verify Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Enter password again"
-                name="password2"
-                onChange={handleChange}
-              />
-            </Form.Group>
+            <>
+              <Form.Group className="mb-3" controlId="password2">
+                <Form.Label>Verify Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Enter password again"
+                  name="password2"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="check-robot">
+                <Form.Check type="checkbox" label="I am not a robot" required />
+              </Form.Group>
+            </>
           )}
-          {title === "Sign Up" && (
-            <Form.Group className="mb-3" controlId="check-robot">
-              <Form.Check type="checkbox" label="I am not a robot" required />
-            </Form.Group>
-          )}
-          <div className="account-form-submit-container">
+          <div className="account-form-bottom">
             {title === "Sign In" ? (
               <>
                 <Form.Text className="text-muted">Need an Account? </Form.Text>
                 <Link
-                  className="create-account"
+                  className="link-style"
                   to="/account/register"
                   onClick={() => {
                     setMessage(null);
@@ -150,7 +157,7 @@ export default function AccountForm({ setToken }) {
                   Already have an account?{" "}
                 </Form.Text>
                 <Link
-                  className="create-account"
+                  className="link-style"
                   to="/account/signin"
                   onClick={() => {
                     setMessage(null);

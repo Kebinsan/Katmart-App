@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Product from "./Product";
-import Trail from "./Trail";
 import Loading from "./Loading";
 import { FilterRight } from "react-bootstrap-icons";
 import Canvas from "./Canvas";
@@ -57,11 +56,13 @@ export default function Products({ allProducts, loading }) {
           <Loading loading={loading} />
         ) : (
           <>
-            <div className="trail-filter-container">
-              <div className="trail-container">
-                <Trail category={category} />
-              </div>
-
+            <Canvas
+              handleClose={handleClose}
+              show={show}
+              products={filteredProducts}
+              setProducts={setFilteredProducts}
+            />
+            <div className="sort-filter-container">
               <div className="filter-icon">
                 <Sort
                   products={filteredProducts}
@@ -71,12 +72,6 @@ export default function Products({ allProducts, loading }) {
                 <FilterRight color="#672934" onClick={handleShow} />
               </div>
             </div>
-            <Canvas
-              handleClose={handleClose}
-              show={show}
-              products={filteredProducts}
-              setProducts={setFilteredProducts}
-            />
             <div className="product-container">
               {filteredProducts.length > 0 ? (
                 filteredProducts.map((product) => {

@@ -84,7 +84,7 @@ export default function CartItem({
                 }}
               />
             </form>
-            <p className="delete-button" onClick={removeHandler}>
+            <p className="link-style del" onClick={removeHandler}>
               Delete
             </p>
           </div>
