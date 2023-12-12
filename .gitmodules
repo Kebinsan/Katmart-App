@@ -1,6 +1,3 @@
 [submodule "Katmart"]
 	path = Katmart
 	url = git@github.com:Kebinsan/Katmart.git
-[submodule "katmart.express.ec2"]
-	path = katmart.express.ec2
-	url = git@github.com:Kebinsan/katmart.express.ec2.git
