@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Product from "./Product";
-import Trail from "./Trail";
 import Loading from "./Loading";
 import { FilterRight } from "react-bootstrap-icons";
 import Canvas from "./Canvas";
@@ -57,11 +56,7 @@ export default function Products({ allProducts, loading }) {
           <Loading loading={loading} />
         ) : (
           <>
-            <div className="trail-filter-container">
-              <div className="trail-container">
-                <Trail category={category} />
-              </div>
-
+            <div className="filter-container">
               <div className="filter-icon">
                 <Sort
                   products={filteredProducts}

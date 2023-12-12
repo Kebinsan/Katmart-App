@@ -5,6 +5,11 @@ import { Button } from "react-bootstrap";
 export default function Cart({ cart, setCart, cartUpdated, setCartUpdated }) {
   const [cartTotal, setCartTotal] = useState(0);
 
+  function clearCart() {
+    setCart([]);
+    setCartUpdated(1);
+  }
+
   return (
     <>
       {cart.length > 0 ? (
@@ -29,9 +34,8 @@ export default function Cart({ cart, setCart, cartUpdated, setCartUpdated }) {
             ) : (
               <div>No Results Found</div>
             )}
-
             <div className="cart-summary">
-              <p className="clear-cart" onClick={() => setCart([])}>
+              <p className="clear-cart" onClick={() => clearCart()}>
                 Clear Cart
               </p>
 
